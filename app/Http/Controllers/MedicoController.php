@@ -99,6 +99,7 @@ class MedicoController extends Controller
      */
     public function show(Medico $medico)
     {
+        return view('medico.show',  compact('medico') );
         //
     }
 

@@ -70,15 +70,19 @@
                                         <td>{{ $persona->especialidad }}</td>
                                         <td>{{ $persona->area }}</td>
                                         <td>
-                                        <a class="btn btn-warning"href="{{ url('/medico/'.$persona->id .'/edit') }}">Editar
-                                        </a>
+                                        <div class="btn-group" role="group" aria-label="Basic example"> 
+                                        
+                                        <a class="btn btn-info" href="{{ url('/medico/'.$persona->id .'/show') }}">Ver </a>    
+                                        <a class="btn btn-warning" href="{{ url('/medico/'.$persona->id .'/edit') }}">Editar </a>
                                         <form method="post" action="{{ url('/medico/' . $persona->personas_id . $persona->id) }}" style="display:inline">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-                                        <button class="btn btn-danger " type="submit" onclick="return confirm('¿Borrar?');" >Borrar </button>
+                                        <button class="btn btn-danger"  type="submit" onclick="return confirm('¿Borrar?');" >Borrar </button>
                                            
                                             </form>
+                                        </div>
                                         </td>
+                        
                                     </tr>
                                 @endforeach
                             </tbody>
