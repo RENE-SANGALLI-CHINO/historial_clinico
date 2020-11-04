@@ -15,10 +15,16 @@
                 @endif
 
             </div class="container">
-            <div class="col text-right">
-                <a href="{{ url('medico/create') }}" class="btn btn-success">AGREGAR MEDICO</a>
-
-            </div>
+            
+            <nav class="navbar navbar-light bg-light">
+                <div class="col text-right">
+                    <a href="{{ url('medico/create') }}" class="btn btn-success">AGREGAR MEDICO</a>
+                </div>
+                <form class="form-inline">
+                  <input name="buscarpor" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" >
+                  <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+              </nav>
         </div class="container">
         <div class="row">
             <div class="col text-center">
@@ -46,13 +52,14 @@
                                     <th>ACCIONES</th>
                                 </tr>
                             </thead>
+  
                             <tbody>
                                 @foreach ($personas as $persona)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
 
                                         <td>
-                                            <img src="{{ asset('storage').'/' . $persona->foto }}"
+                                            <img src="{{ asset('storage') . '/' . $persona->foto }}"
                                                 class="img-thumbnail img-fluid " alt="" width="100">
                                         </td>
                                         <td>{{ $persona->nombre }}</td>
@@ -70,19 +77,23 @@
                                         <td>{{ $persona->especialidad }}</td>
                                         <td>{{ $persona->area }}</td>
                                         <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example"> 
-                                        
-                                        <a class="btn btn-info" href="{{ url('/medico/'.$persona->id .'/show') }}">Ver </a>    
-                                        <a class="btn btn-warning" href="{{ url('/medico/'.$persona->id .'/edit') }}">Editar </a>
-                                        <form method="post" action="{{ url('/medico/' . $persona->personas_id . $persona->id) }}" style="display:inline">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-                                        <button class="btn btn-danger"  type="submit" onclick="return confirm('¿Borrar?');" >Borrar </button>
-                                           
-                                            </form>
-                                        </div>
+                                            <div class="btn-group btn-group-horizontal" role="group">
+
+                                                <a class="btn btn-info"
+                                                    href="{{ route('medico.show', $persona->id) }}">Ver </a>
+                                                <a class="btn btn-warning"
+                                                    href="{{ url('/medico/' . $persona->id . '/edit') }}">Editar </a>
+                                                <form method="post"
+                                                    action="{{ url('/medico/' . $persona->personas_id . $persona->id) }}"
+                                                    style="display:inline">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+                                                    <button class="btn btn-danger" type="submit"
+                                                        onclick="return confirm('¿Borrar?');">Eliminar </button>
+
+                                                </form>
+                                            </div>
                                         </td>
-                        
                                     </tr>
                                 @endforeach
                             </tbody>

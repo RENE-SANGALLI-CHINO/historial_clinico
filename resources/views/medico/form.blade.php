@@ -25,7 +25,7 @@
        
 
         <label for="ci">CEDULA DE IDENTIDAD</label>
-        <input type="number" class="form-control {{$errors->has('ci')?'is-invalid':'' }}" name="ci" id="ci"
+        <input type="text" class="form-control {{$errors->has('ci')?'is-invalid':'' }}" name="ci" id="ci"
         value="{{ isset ($personas->ci)?$personas->ci:old('ci')}}">
         {!! $errors->first('ci','<div class="invalid-feedback">:message</div>') !!}
         <br/>

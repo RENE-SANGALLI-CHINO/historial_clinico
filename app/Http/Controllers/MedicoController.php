@@ -15,7 +15,7 @@ class MedicoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+        {
         $datos['personas'] = Persona::with('medico')->paginate(10);
         return view('medico.index', $datos);
         //
@@ -62,7 +62,7 @@ class MedicoController extends Controller
 
         $datos = request()->except('_token');
         $persona = new Persona;
-        
+
         $persona->nombre = $datos['nombre'];
         $persona->apellido_paterno = $datos['apellido_paterno'];
         $persona->apellido_materno = $datos['apellido_materno'];
@@ -80,7 +80,7 @@ class MedicoController extends Controller
 
 
         $medicos = new Medico;
-        
+
         $medicos->credencial = $datos['credencial'];
         $medicos->profesion = $datos['profesion'];
         $medicos->especialidad = $datos['especialidad'];
@@ -97,9 +97,10 @@ class MedicoController extends Controller
      * @param  \App\Models\Medico  $medico
      * @return \Illuminate\Http\Response
      */
-    public function show(Medico $medico)
+    public function show($id)
     {
-        return view('medico.show',  compact('medico') );
+        $personas = Persona::with('medico')->findOrFail($id);
+        return view('medico.show', compact('personas'));
         //
     }
 
