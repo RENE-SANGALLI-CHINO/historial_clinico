@@ -16,7 +16,7 @@ class MedicoController extends Controller
      */
     public function index()
         {
-        $datos['personas'] = Persona::with('medico')->paginate(10);
+        $datos['persona'] = Persona::with('medico')->paginate(5);
         return view('medico.index', $datos);
         //
     }
@@ -50,7 +50,7 @@ class MedicoController extends Controller
             'telefono' => 'required',
             'direccion' => 'required',
             'correo' => 'required',
-            'foto' => 'required|max:10000|mimes:jpeg,jpg,png',
+            'foto' => 'required|mimes:jpeg,jpg,png',
             'credencial' => 'required',
             'profesion' => 'required',
             'especialidad' => 'required',
@@ -72,15 +72,14 @@ class MedicoController extends Controller
         $persona->telefono = $datos['telefono'];
         $persona->direccion = $datos['direccion'];
         $persona->correo = $datos['correo'];
+        $persona->foto = $datos['foto'];
 
         if ($request->hasFile('foto')) {
-            $datos['foto'] = $request->file('foto')->store('uploads', 'public');
+
+            $datos['foto'] =$request->file('foto')->store('uploads','public');
         }
         $persona->save();
-
-
         $medicos = new Medico;
-
         $medicos->credencial = $datos['credencial'];
         $medicos->profesion = $datos['profesion'];
         $medicos->especialidad = $datos['especialidad'];
@@ -126,6 +125,7 @@ class MedicoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $datos = request()->except(['_token', '_method']);
 
         $campos = [
             'nombre' => 'required',
@@ -142,23 +142,18 @@ class MedicoController extends Controller
             'especialidad' => 'required',
             'area' => 'required',
         ];
-        if ($request->hasFile('foto')) {
-            $campos += ['foto' => 'required|max:10000|mimes:jpeg,jpg,png'];
-        }
-
-
         $mensaje = ["required" => 'El campo :attribute es requerido'];
-
         $this->validate($request, $campos, $mensaje);
 
-        $datos = request()->except(['_token', '_method']);
+        
 
         if ($request->hasFile('foto')) {
 
-            $datos = Persona::findOrfail($id);
-            Storage::delete('public/' . $datos->foto);
+            $personas = Persona::findOrfail($id);
 
-            $datos['foto'] = $request->file('foto')->store('uploads', 'public');
+            Storage::delete('public/'.$personas->foto);
+
+            $personas['foto'] = $request->file('foto')->store('uploads', 'public');
         }
 
         Persona::where('id', '=', $id)->update($datos);
@@ -176,11 +171,12 @@ class MedicoController extends Controller
      */
     public function destroy($id)
     {
-        $datos = Persona::findOrfail($id);
-        if (Storage::delete('public/' . $datos->foto)) {
+        $personas = Persona::findOrfail($id);
+
+        if( Storage::delete('public/'.$personas->foto)){
             Persona::destroy($id);
         }
-
+              
         Medico::destroy($id);
         return redirect('medico')->with('Mensaje', 'Medico eliminado');
         //

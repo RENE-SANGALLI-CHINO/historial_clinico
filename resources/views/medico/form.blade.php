@@ -68,40 +68,40 @@
         
         <label for="credencial">CREDENCIAL</label>
         <input type="text" class="form-control {{$errors->has('credencial')?'is-invalid':'' }}" name="credencial" id="credencial"
-        value="{{ isset ($medicos->credencial)?$medicos->credencial:old('credencial')}}">
+        value="{{ isset ($personas->medico->credencial)?$personas->medico->credencial:old('credencial')}}">
         {!! $errors->first('credencial','<div class="invalid-feedback">:message</div>') !!}
         <br/>
 
 
         <label for="profesion">PROFESION</label>
         <input type="text" class="form-control {{$errors->has('profesion')?'is-invalid':'' }}" name="profesion" id="apellido_paterno"
-        value="{{ isset ($medicos->profesion)?$medicos->profesion:old('profesion')}}">
+        value="{{ isset ($personas->medico->profesion)?$personas->medico->profesion:old('profesion')}}">
         {!! $errors->first('profesion','<div class="invalid-feedback">:message</div>') !!}
         <br/>
         
 
         <label for="especialidad">ESPECIALIDAD</label>
         <input type="text" class="form-control {{$errors->has('especialidad')?'is-invalid':'' }}" name="especialidad" id="especialidad"
-        value="{{ isset ($medicos->especialidad)?$medicos->especialidad:old('especialidad')}}">
+        value="{{ isset ($personas->medico->especialidad)?$personas->medico->especialidad:old('especialidad')}}">
         {!! $errors->first('especialidad','<div class="invalid-feedback">:message</div>')!!}
         <br/>
 
 
         <label for="area">AREA</label>
         <input type="text" class="form-control {{$errors->has('area')?'is-invalid':'' }}" name="area" id="area"
-        value="{{ isset ($medicos->area)?$medicos->area:old('area')}}">
+        value="{{ isset ($personas->medico->area)?$personas->medico->area:old('area')}}">
         {!! $errors->first('area','<div class="invalid-feedback">:message</div>') !!}
         <br/>
 
 
         <label for="foto" class="control-label">FOTO</label>
         @if (isset($personas->foto))
-        <br/>
-            <img src="{{ asset('storage').'/'.$persona->foto }}" alt= "" width="200">
-        <br/>                
+        
+            <img src="{{ asset('storage').'/'.$personas->foto }}" alt= "" width="200">             
         @endif
         
-        <input type="file" class="form-control {{$errors->has('foto')?'is-invalid':'' }}" name="foto" id="foto" value="">
+        <input type="file" class="form-control {{$errors->has('foto')?'is-invalid':'' }}" name="foto" id="foto" 
+        value=" ">
         {!! $errors->first('foto','<div class="invalid-feedback">:message</div>') !!}
         <br/>
 

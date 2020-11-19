@@ -24,7 +24,7 @@ class CreatePersonasTable extends Migration
             $table->integer('telefono')->nullable();
             $table->string('direccion')->nullable();
             $table->string('correo');
-            $table->string('foto')->nullable();
+            $table->string('foto');
             $table->timestamps();
         });
     }

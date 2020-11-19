@@ -20,10 +20,10 @@
                   <h5 class="card-title"> <strong>Celular: </strong>{{ $personas->celular }}</h5>
                   <h5 class="card-title"> <strong>Telefono: </strong>{{ $personas->telefono }}</h5>
                   <h5 class="card-title"> <strong>Correo: </strong>{{ $personas->correo }}</h5>
-                  <h5 class="card-title"> <strong>Credencial: </strong>{{ $personas->credencial }}</h5>
-                  <h5 class="card-title"> <strong>Profesion: </strong>{{ $personas->profesion }}</h5>
-                  <h5 class="card-title"> <strong>Especialidad: </strong>{{ $personas->especialidad }}</h5>
-                  <h5 class="card-title"> <strong>Area: </strong>{{ $personas->area }}</h5>
+                  <h5 class="card-title"> <strong>Credencial: </strong>{{ $personas->medico->credencial }}</h5>
+                  <h5 class="card-title"> <strong>Profesion: </strong>{{ $personas->medico->profesion }}</h5>
+                  <h5 class="card-title"> <strong>Especialidad: </strong>{{ $personas->medico->especialidad }}</h5>
+                  <h5 class="card-title"> <strong>Area: </strong>{{ $personas->medico->area }}</h5>
                   
                   <a href="{{ url ('medico') }}"class="btn btn-primary">Regresar</a>
                 </div>

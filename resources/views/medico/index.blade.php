@@ -54,42 +54,38 @@
                             </thead>
   
                             <tbody>
-                                @foreach ($personas as $persona)
+                                @foreach ($persona as $personas)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
 
-                                        <td>
-                                            <img src="{{ asset('storage') . '/' . $persona->foto }}"
-                                                class="img-thumbnail img-fluid " alt="" width="100">
+                                        <td> 
+                                        <img src="{{ asset('storage').'/'.$personas->foto }}" alt="" width="200" > 
                                         </td>
-                                        <td>{{ $persona->nombre }}</td>
-                                        <td> {{ $persona->apellido_paterno }}</td>
-                                        <td>{{ $persona->apellido_materno }}</td>
-                                        <td>{{ $persona->ci }}</td>
-                                        <td>{{ $persona->fecha_nacimiento }}</td>
-                                        <td>{{ $edad = \Carbon\Carbon::parse($persona->fecha_nacimiento)->age }}</td>
-                                        <td>{{ $persona->direccion }}</td>
-                                        <td>{{ $persona->celular }}</td>
-                                        <td>{{ $persona->telefono }}</td>
-                                        <td>{{ $persona->correo }}</td>
-                                        <td>{{ $persona->credencial }}</td>
-                                        <td>{{ $persona->profesion }}</td>
-                                        <td>{{ $persona->especialidad }}</td>
-                                        <td>{{ $persona->area }}</td>
+                                        <td>{{ $personas->nombre }}</td>
+                                        <td> {{ $personas->apellido_paterno }}</td>
+                                        <td>{{ $personas->apellido_materno }}</td>
+                                        <td>{{ $personas->ci }}</td>
+                                        <td>{{ $personas->fecha_nacimiento }}</td>
+                                        <td>{{ $edad = \Carbon\Carbon::parse($personas->fecha_nacimiento)->age }}</td>
+                                        <td>{{ $personas->direccion }}</td>
+                                        <td>{{ $personas->celular }}</td>
+                                        <td>{{ $personas->telefono }}</td>
+                                        <td>{{ $personas->correo }}</td>
+                                        <td>{{ $personas->medico->credencial }}</td>
+                                        <td>{{ $personas->medico->profesion }}</td>
+                                        <td>{{ $personas->medico->especialidad }}</td>
+                                        <td>{{ $personas->medico->area }}</td>
                                         <td>
                                             <div class="btn-group btn-group-horizontal" role="group">
 
                                                 <a class="btn btn-info"
-                                                    href="{{ route('medico.show', $persona->id) }}">Ver </a>
+                                                    href="{{ route('medico.show', $personas->id) }}">Ver </a>
                                                 <a class="btn btn-warning"
-                                                    href="{{ url('/medico/' . $persona->id . '/edit') }}">Editar </a>
-                                                <form method="post"
-                                                    action="{{ url('/medico/' . $persona->personas_id . $persona->id) }}"
-                                                    style="display:inline">
+                                                    href="{{ url('/medico/' .$personas->id.'/edit') }}">Editar </a>
+                                                <form method="post" action="{{ url('/medico/'.$personas->personas_id ) }}" style="display:inline">
                                                     {{ csrf_field() }}
                                                     {{ method_field('DELETE') }}
-                                                    <button class="btn btn-danger" type="submit"
-                                                        onclick="return confirm('¿Borrar?');">Eliminar </button>
+                                                    <button class="btn btn-danger" type="submit" onclick="return confirm('¿Borrar?');">Eliminar</button>
 
                                                 </form>
                                             </div>
@@ -98,8 +94,9 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $personas->links() }}
+                        
                     </div>
+                    {{ $persona->links() }}
                 </div>
             </div>
         </div>
